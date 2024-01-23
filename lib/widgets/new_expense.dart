@@ -41,77 +41,100 @@ class _NewExpenseState extends State<NewExpense> {
   
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          TextField(
-            controller: _titleController,
-            maxLength: 50, 
-            decoration: const InputDecoration
-            (
-              label: Text("Title")
+    return Container(
+      decoration: const ShapeDecoration(color: Color.fromARGB(255, 255, 235, 244), shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20)))),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 16),
+        child: Column(
+          children: [
+            TextField(
+              controller: _titleController,
+              maxLength: 50, 
+              decoration: InputDecoration
+              (
+                label: const Text("Title"),
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                )
+              ),
             ),
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: 
-                TextField(
-                  controller: _amountController,
-                  keyboardType: TextInputType.number,
-                  decoration: 
-                  const InputDecoration(
-                    prefixText: "\$ ",
-                    label: Text("Amount")
+            Row(
+              children: [
+                Expanded(
+                  child: 
+                  TextField(
+                    controller: _amountController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      prefixText: "\$ ",
+                      label: const Text("Amount"),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      )
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(_selectedDate == null ? "No date selected" : formatter.format(_selectedDate!)),
-                    IconButton(
-                      onPressed: () {_presentDatePicker();}, 
-                      icon: const Icon(Icons.calendar_month)),
-                  ],
+                const SizedBox(width: 16),
+                Expanded(
+                  child: 
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(_selectedDate == null ? "No date selected" : formatter.format(_selectedDate!),
+                        style: const TextStyle(color: Colors.black)
+                      ),
+                      IconButton(
+                        onPressed: () {_presentDatePicker();}, 
+                        icon: const Icon(Icons.calendar_month), color: const Color.fromARGB(255, 104, 16, 46),),
+                    ],
+                  )
                 )
-              )
-            ],
-          ),
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              DropdownButton(
-                value: _selectedCategory,
-                items: Category.values.map(
-                  (category) => DropdownMenuItem(
-                    value: category,
-                      child: Text(category.name.toUpperCase())
-                    )
-                  ).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedCategory = value;
-                    });
-                  }
+              ],
+            ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                DropdownButton(
+                  value: _selectedCategory,
+                  items: Category.values.map(
+                    (category) => DropdownMenuItem(
+                      value: category,
+                        child: Text(category.name.toUpperCase())
+                      )
+                    ).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedCategory = value;
+                      }
+                    );
+                  },
+                  style: const TextStyle(color: Colors.black),
+                  icon: const Icon(Icons.arrow_drop_down),
+                  iconSize: 24,
+                  elevation: 16,
+                  underline: Container (height: 2, color: const Color.fromARGB(255, 45, 45, 45)),
+                  dropdownColor: Colors.white,
                 ), 
-              const Spacer(),  
-              ElevatedButton(
-                onPressed: () {}, 
-                child: const Text("Save")
-              ),
-              TextButton(
-                onPressed: () {Navigator.pop(context);}, 
-                child: const Text("Cancel")
-              )
-            ],
-          )
-        ]   
+                const Spacer(),  
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.pink, padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 50)), 
+                  child: const Text("Save"),
+                ),
+                const SizedBox(width: 30),
+                TextButton(
+                  onPressed: () {Navigator.pop(context);}, 
+                  child: const Text("Cancel", style: TextStyle(color: Colors.pink),)
+                )
+              ],
+            )
+          ]   
+        ),
       ),
     );
   }
