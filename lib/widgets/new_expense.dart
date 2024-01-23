@@ -32,6 +32,37 @@ class _NewExpenseState extends State<NewExpense> {
     });
   }
 
+  void _submitExpenseData(BuildContext context) {
+  if (_titleController.text.trim().isEmpty) {
+    _showErrorDialog(context, 'Title cannot be empty.');
+  } else if (_amountController.text.trim().isEmpty) {
+    _showErrorDialog(context, 'Amount cannot be empty.');
+  } else {
+    // save data
+  }
+}
+
+void _showErrorDialog(BuildContext context, String errorMessage) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Error'),
+        content: Text(errorMessage),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('OK', style: TextStyle(color: Colors.pink)),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+
   @override
   void dispose() {
     _titleController.dispose();
@@ -122,7 +153,7 @@ class _NewExpenseState extends State<NewExpense> {
                 ), 
                 const Spacer(),  
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {_submitExpenseData(context);},
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.pink, padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 50)), 
                   child: const Text("Save"),
                 ),
