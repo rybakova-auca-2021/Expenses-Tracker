@@ -2,7 +2,9 @@ import 'package:expense_tracker/models/expense.dart';
 import 'package:flutter/material.dart';
 
 class NewExpense extends StatefulWidget {
-  const NewExpense({super.key});
+  const NewExpense({super.key, required this.onAddExpense});
+
+  final Function(Expense expense) onAddExpense;
 
   
   @override
@@ -33,14 +35,28 @@ class _NewExpenseState extends State<NewExpense> {
   }
 
   void _submitExpenseData(BuildContext context) {
+  final enteredAmount = double.tryParse(_amountController.text);
+  final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
+  
   if (_titleController.text.trim().isEmpty) {
     _showErrorDialog(context, 'Title cannot be empty.');
-  } else if (_amountController.text.trim().isEmpty) {
+  } else if (_amountController.text.trim().isEmpty || amountIsInvalid) {
     _showErrorDialog(context, 'Amount cannot be empty.');
   } else {
-    // save data
+    final selectedDate = _selectedDate ?? DateTime.now();
+    final selectedCategory = _selectedCategory ?? Category.food;
+
+    widget.onAddExpense(
+      Expense(
+        title: _titleController.text,
+        amount: enteredAmount.toDouble(),
+        date: selectedDate,
+        category: selectedCategory,
+      ),
+    );
   }
 }
+
 
 void _showErrorDialog(BuildContext context, String errorMessage) {
   showDialog(
