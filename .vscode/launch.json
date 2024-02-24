@@ -1,0 +1,39 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Expenses-Tracker",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "Expenses-Tracker (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "Expenses-Tracker (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "Flutter (Nexus 5X API 33)",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "Nexus 5X API 33",
+            "flutterMode": "debug"
+        },
+        {
+            "name": "Flutter (Pixel 6a API 33)",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "Pixel 6a API 33",
+            "flutterMode": "profile"
+        }
+    ]
+}
